@@ -1,0 +1,8 @@
+Manifest-Version: 1.0
+Class-Path: hamcrest-core-1.3.jar mysql-connector-java-8.0.13.jar comm
+ ons-fileupload-1.3.1.jar commons-io-2.5.jar javax.transaction.jar jav
+ ax.servlet.jsp.jstl.jar javax.servlet.jsp.jar javax.servlet.jar javax
+ .resource.jar javax.persistence.jar javax.jms.jar javax.ejb.jar javax
+ .annotation.jar junit-4.11.jar
+Main-Class: 
+

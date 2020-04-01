@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
+         version="4.0">
+
+    <welcome-file-list>
+        <welcome-file>index.jsp</welcome-file>
+        <welcome-file>default.jsp</welcome-file>
+        <welcome-file>history.jsp</welcome-file>
+        <welcome-file>historyServlet.jsp</welcome-file>
+    </welcome-file-list>
+
+
+    <!--搜索-->
+    <servlet>
+        <servlet-name>SearchServlet</servlet-name>
+        <servlet-class>log.servlet.SearchServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>SearchServlet</servlet-name>
+        <url-pattern>/searchServlet</url-pattern>
+    </servlet-mapping>
+
+    <!--上传视频-->
+    <servlet>
+        <servlet-name>UploadServlet</servlet-name>
+        <servlet-class>log.servlet.UploadServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>UploadServlet</servlet-name>
+        <url-pattern>/uploadServlet</url-pattern>
+    </servlet-mapping>
+
+    <!-- 图形验证码servlet -->
+    <servlet>
+        <servlet-name>CaptchaServlet</servlet-name>
+        <servlet-class>log.servlet.CaptchaServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>CaptchaServlet</servlet-name>
+        <url-pattern>/captcha</url-pattern>
+    </servlet-mapping>
+
+    <!--登录-->
+    <servlet>
+        <servlet-name>LogServlet</servlet-name>
+        <servlet-class>log.servlet.LogServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>LogServlet</servlet-name>
+        <url-pattern>/logServlet</url-pattern>
+    </servlet-mapping>
+
+    <!--注册-->
+    <servlet>
+        <servlet-name>SignServlet</servlet-name>
+        <servlet-class>log.servlet.SignServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>SignServlet</servlet-name>
+        <url-pattern>/signupServlet</url-pattern>
+    </servlet-mapping>
+
+    <!--注销-->
+    <servlet>
+        <servlet-name>QuitServlet</servlet-name>
+        <servlet-class>log.servlet.QuitServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>QuitServlet</servlet-name>
+        <url-pattern>/quitServlet</url-pattern>
+    </servlet-mapping>
+
+    <!--详情页-->
+    <servlet>
+        <servlet-name>SingleServletDaoImpl</servlet-name>
+        <servlet-class>log.servlet.SingleServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>SingleServletDaoImpl</servlet-name>
+        <url-pattern>/SingleServlet</url-pattern>
+    </servlet-mapping>
+
+    <!--视频进度-->
+    <servlet>
+        <servlet-name>SetCurrentTimeServlet</servlet-name>
+        <servlet-class>log.servlet.SetCurrentTimeServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>SetCurrentTimeServlet</servlet-name>
+        <url-pattern>/setCurrentTimeServlet</url-pattern>
+    </servlet-mapping>
+
+    <!--视频学习超时提醒-->
+    <servlet>
+        <servlet-name>TimeoutReminderServlet</servlet-name>
+        <servlet-class>log.servlet.TimeoutReminderServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>TimeoutReminderServlet</servlet-name>
+        <url-pattern>/timeoutReminderServlet</url-pattern>
+    </servlet-mapping>
+
+    <!--所有视频-->
+    <servlet>
+        <servlet-name>ShowServlet</servlet-name>
+        <servlet-class>log.servlet.ShowServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ShowServlet</servlet-name>
+        <url-pattern>/showServlet</url-pattern>
+    </servlet-mapping>
+
+    <!--测试-->
+    <servlet>
+        <servlet-name>CeshiServlet</servlet-name>
+        <servlet-class>log.servlet.CeshiServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>CeshiServlet</servlet-name>
+        <url-pattern>/ceshiServlet</url-pattern>
+    </servlet-mapping>
+
+</web-app>
