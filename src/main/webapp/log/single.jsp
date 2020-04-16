@@ -184,7 +184,8 @@
                 <%
                     if(id > 0){
                 %>
-                <li><a href="history.jsp" class="sub-icon"><span class="glyphicon glyphicon-home glyphicon-hourglass" aria-hidden="true"></span>历史记录</a></li>
+                <li><a href="history.jsp" class="sub-icon"><span class="glyphicon glyphicon-home glyphicon-hourglass" aria-hidden="true"></span>待学课程</a></li>
+                <li><a class="sub-icon"><span class="glyphicon glyphicon-home glyphicon-hourglass" aria-hidden="true"></span>完成的课程</a></li>
                 <%
                     }
                 %>
@@ -233,13 +234,13 @@
 			<div class="show-top-grids">
 				<div class="col-sm-8 single-left">
                     <%
-                        Vedio vedio = (Vedio)session.getAttribute("vedio");
-                        Recode recode = (Recode)session.getAttribute("recode");
+                        Vedio vedio = (Vedio) session.getAttribute("vedio");
+                        Recode recode = (Recode) session.getAttribute("recode");
                         int curTime = recode.getTime();
 
                         int timeNum;//超时学习提醒时间
                         try {
-                            timeNum = Integer.parseInt((String)session.getAttribute("timeNum"));
+                            timeNum = Integer.parseInt((String) session.getAttribute("timeNum"));
                         } catch (Exception e) {
                             timeNum = 0;
                         }
@@ -253,6 +254,7 @@
                                 <source src="../<%=vedio.getUrl()%>.mp4" type="video/mp4"></video>
 						</div>
                         <script>
+                            var url = "/VedioStudyMaven_war_exploded";
                             //设置视频观看进度
                             myVid=document.getElementById("myv");
                             function setCurTime() {
@@ -261,37 +263,41 @@
                             $(document).ready(function(){
                                 setCurTime();
                             });
-                            //firefox ，Chrome并不支持onbeforeunload的文字提醒
+                            //firefox ，Chrome并不支持onbeforeunload的文字提醒。页面卸载时触发视频进度记录。
                             window.onbeforeunload = function(){
                                 return login();
                             }
-
+                            //监听视频结束事件
+                            myVid.addEventListener('play',function () {
+                                var i = window.setInterval(function () {
+                                    if(myVid.ended){
+                                        clearInterval(i);
+                                        window.location.href="mytest.jsp";
+                                    }
+                                }, 20)
+                            },false);
                             //向后台传送视频播放进度
-                            var url = "/VedioStudyMaven_war_exploded";
                             function login() {
                                 var time = myVid.currentTime;
                                 $.ajax({
-                                    //注意一下这几个参数
-                                    type : "POST",              //方法类型
-                                    dataType : "JSON",          //预期服务器返回的数据类型JSON
-                                    url : url + "/setCurrentTimeServlet",        //提交到的 url
+                                    type : "POST",
+                                    dataType : "JSON",
+                                    url : url + "/setCurrentTimeServlet",
                                     data : {
                                         time:time
-                                    }, //序列化输出字符串类型的结果
+                                    },
                                     success : function(result) {
-                                        console.log(result);    //打印服务端返回的数据(调试用)
+                                        console.log(result);
                                         /*if (result.resultCode == 200) { //200状态码 = 成功
                                             alert("请求成功 success!" + result);
                                         }*/
-                                        alert("请求成功 success!" + result);
-                                        ;
                                     }
                                     /*,error : function() {
                                         alert("请求失败，error!");
                                     }*/
                                 });
                             }
-
+                            //超时学习提醒功能
                             var timeNum = <%=timeNum%>;
                             $(function(){
                                 if (timeNum > 100) {
@@ -395,7 +401,7 @@
                                 <option value="JPN">日本</option>
                             </select>
                         </li>
-                        <li><a href="history.jsp" class="f-history">历史记录</a></li>
+                        <li><a href="history.jsp" class="f-history">待学课程</a></li>
                         <li><a href="#small-dialog5" class="play-icon popup-with-zoom-anim f-history f-help">帮助</a></li>
                     </ul>
                 </div>

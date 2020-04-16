@@ -70,7 +70,7 @@ public class SingleDaoImpl implements SingleDao {
         return vedio;
     }
 
-    public void insertVedio (int uid, int vid, Vedio vedio) throws Exception{
+    public void insertRecode (int uid, int vid, Vedio vedio) throws Exception{
         Timestamp releaseTime = new Timestamp(System.currentTimeMillis());
         String sql = "insert into recode values(null,?,?,?,?,?,?,?,?)";
         try {
@@ -78,7 +78,7 @@ public class SingleDaoImpl implements SingleDao {
             map.put("uid", uid);
             map.put("vid", vid);
             map.put("releaseTime", releaseTime);
-            VoSetData.insertVedio(sql,vedio,map);
+            VoSetData.insertRecode(sql,vedio,map);
         } catch (Exception e) {
             e.printStackTrace();
         }

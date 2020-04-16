@@ -184,7 +184,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                 <%
                     if(id > 0){
                 %>
-                <li><a href="history.jsp" class="sub-icon"><span class="glyphicon glyphicon-home glyphicon-hourglass" aria-hidden="true"></span>历史记录</a></li>
+                <li><a href="history.jsp" class="sub-icon"><span class="glyphicon glyphicon-home glyphicon-hourglass" aria-hidden="true"></span>待学课程</a></li>
+                <li><a href="historyfinish.jsp" class="sub-icon"><span class="glyphicon glyphicon-home glyphicon-hourglass" aria-hidden="true"></span>完成的课程</a></li>
                 <%
                     }
                 %>
@@ -365,7 +366,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                                 <option value="JPN">日本</option>
                             </select>
                         </li>
-                        <li><a href="history.jsp" class="f-history">历史记录</a></li>
+                        <li><a href="history.jsp" class="f-history">待学课程</a></li>
                         <li><a href="#small-dialog5" class="play-icon popup-with-zoom-anim f-history f-help">帮助</a></li>
                     </ul>
                 </div>

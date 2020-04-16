@@ -6,10 +6,12 @@ import log.vo.*;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.Time;
 import java.sql.Timestamp;
 import java.util.List;
 import java.util.Map;
 
+import static log.factory.MysqlFactory.executeMyUpdate;
 import static log.factory.MysqlFactory.getGeneratedKeysResultSet;
 
 /**
@@ -52,6 +54,24 @@ public class VoSetData {
         return recode;
     }
 
+    public static List<Test> queryTestList(String sql, List<Test> list) throws Exception{
+        final ResultSet result = MysqlFactory.getQueryResultSet(sql);
+        while(result.next()) {
+            Test test = new Test();
+            test.setId(result.getInt("id"));
+            test.setVid(result.getInt("vid"));
+            test.setTestNum(result.getInt("testNum"));
+            test.setStem(result.getString("stem"));
+            test.setOptiona(result.getString("optiona"));
+            test.setOptionb(result.getString("optionb"));
+            test.setOptionc(result.getString("optionc"));
+            test.setOptiond(result.getString("optiond"));
+            test.setKey(result.getString("key"));
+            list.add(test);
+        }
+        return list;
+    }
+
     public static List<Vedio> queryVedioList(String sql, List<Vedio> list) throws Exception{
         final ResultSet result = MysqlFactory.getQueryResultSet(sql);
         while(result.next()) {
@@ -86,7 +106,7 @@ public class VoSetData {
         return vedio;
     }
 
-    public static void insertVedio(String sql, Vedio vedio, Map<String,Object> map) throws Exception{
+    public static void insertRecode(String sql, Vedio vedio, Map<String,Object> map) throws Exception{
         MySQLConnection dbconn = new MySQLConnection();
         PreparedStatement pstmt = dbconn.getConnection().prepareStatement(sql);
         pstmt.setInt(1, (Integer) map.get("uid"));
@@ -97,6 +117,22 @@ public class VoSetData {
         pstmt.setInt(6, vedio.getCount());
         pstmt.setTimestamp(7, (Timestamp) map.get("releaseTime"));
         pstmt.setInt(8, 0);
+        pstmt.executeUpdate();
+    }
+
+    public static void insertVedio(String sql, Map<String,Object> map) throws Exception{
+        MySQLConnection dbconn = new MySQLConnection();
+        PreparedStatement pstmt = dbconn.getConnection().prepareStatement(sql);
+        pstmt.setString(1, (String) map.get("vedioTitle"));
+        pstmt.setString(2, (String) map.get("url"));
+        pstmt.setString(3, (String) map.get("publisher"));
+        pstmt.setTimestamp(4, (Timestamp) map.get("release"));
+        pstmt.setInt(5, (Integer) map.get("count"));
+        pstmt.setTime(6, Time.valueOf((String) map.get("time")));
+        String category = (String) map.get("category");
+        pstmt.setString(7, category.toUpperCase());
+        pstmt.setString(8, (String) map.get("introduce"));
+        pstmt.setInt(9, Integer.parseInt((String) map.get("integral")));
         pstmt.executeUpdate();
     }
 
@@ -111,6 +147,7 @@ public class VoSetData {
             user.setUserEmail(result.getString("userEmail"));
             user.setBirthday(result.getString("birthday"));
             user.setPlace(result.getString("place"));
+            user.setVedioIntegral(result.getInt("vedioIntegral"));
         }
         return user;
     }
@@ -134,6 +171,7 @@ public class VoSetData {
     }
 
     public static int updateVo(String sql) throws Exception{
-        return MysqlFactory.getUpdateResultSet(sql);
+        PreparedStatement pstat = MysqlFactory.getUpdateResultSet(sql);
+        return pstat.executeUpdate();
     }
 }

@@ -195,7 +195,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
         <div class="main-grids news-main-grids">
             <div class="recommended-info">
                 <%
-                    List<Vedio> vedioList = (ArrayList<Vedio>)session.getAttribute("vedioList");
+                    List<Vedio> vedioList = (ArrayList<Vedio>) session.getAttribute("vedioList");
                     Iterator<Vedio> aIter = vedioList.iterator();
                     int i = 0;
                     if (!aIter.hasNext()) {

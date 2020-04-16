@@ -1,10 +1,8 @@
 package log.factory;
 
 import log.dao.*;
-import log.dao.impl.HistoryDaoImpl;
-import log.dao.impl.IndexDaoImpl;
-import log.dao.impl.ShowDaoImpl;
-import log.dao.impl.SingleDaoImpl;
+import log.dao.impl.*;
+import log.vo.Test;
 
 /**
  * Dao工厂
@@ -26,4 +24,12 @@ public class DaoFactory {
     public static SingleDao getSingleDaoInstance () {
 	    return new SingleDaoImpl();
 	}
+
+	public static UserDao getUserDaoInstance() {
+	    return new UserDaoImpl();
+    }
+
+    public static TestDao getTestDaoInstance() {
+	    return new TestDaoImpl();
+    }
 }

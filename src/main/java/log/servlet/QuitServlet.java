@@ -20,7 +20,10 @@ public class QuitServlet extends HttpServlet {
 
         //在session销毁的时候 把loginMap中保存的键值对清除
         HttpSession session = request.getSession();
-        String user_id = request.getSession().getAttribute("id").toString();
+        String user_id = "";
+        if(null != request.getSession().getAttribute("id") || "".equals(request.getSession().getAttribute("id"))) {
+            user_id = request.getSession().getAttribute("id").toString();
+        }
         int id = 0;
         //session.setAttribute("id",id);
         if(id == 0){

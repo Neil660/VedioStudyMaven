@@ -2,6 +2,10 @@ package log.tools;
 
 public class VedioStudyConstants {
 
+    public final static String USER_NO_EXITS = "该用户不存在！";
+
+    public final static String USER_PASSWORD_WRONG = "密码错误！";
+
     public final static String EXISTING_ACCOUNTS = "该邮件或者电话号码已经被注册，请直接登录！";
 
     public final static String MULTIPLE_LOGINS = "账号已在其他地方登录，请注意账号安全！";

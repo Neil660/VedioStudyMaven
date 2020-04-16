@@ -61,6 +61,11 @@ public class Vedio implements Serializable {
      * 视频介绍
      */
     private String introduce;
+
+    /**
+     * 视频积分
+     */
+    private int integral;
 }
 
 

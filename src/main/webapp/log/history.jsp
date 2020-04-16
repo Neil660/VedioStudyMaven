@@ -6,7 +6,7 @@
 <%@ page import="log.dao.HistoryDao" %>
 <html>
 <head>
-    <title>历史记录</title>
+    <title>待学课程</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="keywords" content="My Play Responsive web template, Bootstrap Web Templates, Flat Web Templates, Andriod Compatible web template,
@@ -95,7 +95,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
             <li class="active"><a class="home-icon"><span></span></a></li>
             <li><a href="index.jsp" class="home-icon"><span class="glyphicon glyphicon-home" aria-hidden="true"></span>首页</a></li>
             <li><a href="shows.jsp" class="user-icon"><span class="glyphicon glyphicon-home glyphicon-blackboard" aria-hidden="true"></span>视频学习课程</a></li>
-            <li class="active"><a class="sub-icon"><span class="glyphicon glyphicon-home glyphicon-hourglass" aria-hidden="true"></span>历史记录</a></li>
+            <li class="active"><a class="sub-icon"><span class="glyphicon glyphicon-home glyphicon-hourglass" aria-hidden="true"></span>待学课程</a></li>
+            <li><a href="historyfinish.jsp" class="sub-icon"><span class="glyphicon glyphicon-home glyphicon-hourglass" aria-hidden="true"></span>完成的课程</a></li>
             <!-- script-for-menu -->
             <script>
                 $( "li a.menu1" ).click(function() {
@@ -143,7 +144,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
             <div class="recommended-grids english-grid">
                 <div class="recommended-info">
                     <div class="heading">
-                        <h3>历史记录</h3>
+                        <h3>待学课程</h3>
                     </div>
                     <div class="clearfix"> </div>
                 </div>
@@ -178,50 +179,51 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
             </div>
         </div>
     </div>
-    <!-- 底部 -->
-    <div class="footer">
-        <div class="footer-grids">
-            <div class="footer-top">
-                <div class="footer-top-nav">
-                    <ul>
-                        <li><a href="about.jsp">关于我们</a></li>
-                        <li><a href="copyright.jsp">版权</a></li>
-                        <li><a href="developers.jsp">研发者</a></li>
-                    </ul>
-                </div>
-                <div class="footer-bottom-nav">
-                    <ul>
-                        <li><a href="privacy.jsp">政策与隐私</a></li>
-                        <li><a href="#small-dialog4" class="play-icon popup-with-zoom-anim">反馈</a></li>
-                        <li><a href="try.jsp">其他</a></li>
-                    </ul>
-                </div>
-            </div>
-            <div class="footer-bottom">
+
+<!-- 底部 -->
+<div class="footer">
+    <div class="footer-grids">
+        <div class="footer-top">
+            <div class="footer-top-nav">
                 <ul>
-                    <li class="languages">
-                        <select class="form-control bfh-countries" data-country="US">
-                            <option value="">选择语言</option>
-                            <option>中文</option>
-                            <option>English</option>
-                            <option>日本語</option>
-                        </select>
-                    </li>
-                    <li class="languages">
-                        <select class="form-control bfh-countries">
-                            <option value="">选择国家</option>
-                            <option value="CHN">中国</option>
-                            <option value="ASM">American</option>
-                            <option value="JPN">日本</option>
-                        </select>
-                    </li>
-                    <li><a href="history.jsp" class="f-history">历史记录</a></li>
-                    <li><a href="#small-dialog5" class="play-icon popup-with-zoom-anim f-history f-help">帮助</a></li>
+                    <li><a href="about.jsp">关于我们</a></li>
+                    <li><a href="copyright.jsp">版权</a></li>
+                    <li><a href="developers.jsp">研发者</a></li>
+                </ul>
+            </div>
+            <div class="footer-bottom-nav">
+                <ul>
+                    <li><a href="privacy.jsp">政策与隐私</a></li>
+                    <li><a href="#small-dialog4" class="play-icon popup-with-zoom-anim">反馈</a></li>
+                    <li><a href="try.jsp">其他</a></li>
                 </ul>
             </div>
         </div>
+        <div class="footer-bottom">
+            <ul>
+                <li class="languages">
+                    <select class="form-control bfh-countries" data-country="US">
+                        <option value="">选择语言</option>
+                        <option>中文</option>
+                        <option>English</option>
+                        <option>日本語</option>
+                    </select>
+                </li>
+                <li class="languages">
+                    <select class="form-control bfh-countries">
+                        <option value="">选择国家</option>
+                        <option value="CHN">中国</option>
+                        <option value="ASM">American</option>
+                        <option value="JPN">日本</option>
+                    </select>
+                </li>
+                <li><a href="history.jsp" class="f-history">待学课程</a></li>
+                <li><a href="#small-dialog5" class="play-icon popup-with-zoom-anim f-history f-help">帮助</a></li>
+            </ul>
+        </div>
     </div>
-    <!-- //底部 -->
+</div>
+<!-- //底部 -->
 </div>
     <div class="clearfix"> </div>
 

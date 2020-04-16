@@ -43,10 +43,11 @@ public class UploadServlet extends HttpServlet {
         }
 
         //设置多媒体文件参数
-        HashMap<String, String> map = new HashMap<String, String>();
+        HashMap<String, Object> map = new HashMap<>();
         String filename = null;//文件名
         String filename_extension = null;//文件后缀名
         String filePath = null;
+        IndexDao indexDAO = DaoFactory.getIndexDaoInstance();
         try {
             // 为基于磁盘的文件项创建工厂
             DiskFileItemFactory factory = new DiskFileItemFactory();
@@ -75,8 +76,8 @@ public class UploadServlet extends HttpServlet {
                         filename = filename.substring(filename.lastIndexOf("\\") + 1);
                         //给定文件名一个唯一的name
                         try {
-                            IndexDao indexDAO = DaoFactory.getIndexDaoInstance();
-                            filename = indexDAO.getVedioName(map.get("category"));
+                            filename = indexDAO.getVedioName((String) map.get("category"));
+                            map.put("url",filename);
                         } catch (Exception e) {
                             e.printStackTrace();
                         }
@@ -127,6 +128,13 @@ public class UploadServlet extends HttpServlet {
             boolean beginConver = zout.beginConver(targetExtension,isDelSourseFile);
             System.out.println(beginConver);
             System.out.println("=================转码过程彻底结束=====================");
+        }
+
+        //将视频信息存储在数据库
+        try {
+            indexDAO.insertVedio(map);
+        } catch (Exception e) {
+            e.printStackTrace();
         }
         response.sendRedirect("log/index.jsp");
     }

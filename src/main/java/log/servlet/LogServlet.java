@@ -30,46 +30,57 @@ public class LogServlet extends HttpServlet {
             throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
         response.setContentType("text/html;charset=UTF-8");
+        HttpSession session = request.getSession();
 
         String userEmail=request.getParameter("userEmail");
         String userPassword=request.getParameter("userPassword");
         String verCode = request.getParameter("verCode");
 
         //判断验证码是否正确
-        if(!CaptchaUtil.ver(verCode, request)) {
+        /*if(!CaptchaUtil.ver(verCode, request)) {
             CaptchaUtil.clear(request);  // 清除session中的验证码
             PrintWriter writer = response.getWriter();
             writer.println("验证码不正确");
             writer.flush();
             return;
-        }
+        }*/
 
         int flag = 0;
         int id = 0;
         int userRole = 0;
 
-        //验证密码
         try {
-            StringBuffer sqlBuffer = new StringBuffer("select id, userRole, userPassword from user where userEmail='");
+            //验证用户和密码
+            StringBuffer sqlBuffer = new StringBuffer("select * from user where userEmail='");
             sqlBuffer.append(userEmail).append("' or userPhone='").append(userEmail).append("'");
             String  sql = sqlBuffer.toString();
             String upw = null;
             User user = new User();
 
             user = VoSetData.queryUser(sql, user);
+            //用户不存在
+            if(null == user.getUserName() || "".equals(user.getUserName())){
+                session.setAttribute("errorSta", VedioStudyConstants.USER_NO_EXITS);
+                response.sendRedirect("error.jsp");
+            }
             id = user.getId();
             userRole = user.getUserRole();
             upw = user.getUserPassword();
             if(userPassword.equals(upw)){
                 flag = 1;
             }
-        }catch(SQLException e){e.printStackTrace();}
-        catch (Exception e) { e.printStackTrace(); }
+        }catch(SQLException e){
+            e.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
         //密码正确
         if(flag == 1) {
             //登录监听器，防止用户重复登录
-            HttpSession session = request.getSession();
+            if(null != session.getAttribute("id")){
+                session.removeAttribute("id");
+            }
             ServletContext application = session.getServletContext();
             @SuppressWarnings("unchecked")
             Map<String, Object> loginMap = (Map<String, Object>) application.getAttribute("loginMap");
@@ -92,6 +103,9 @@ public class LogServlet extends HttpServlet {
             // session 销毁时间 单位：秒
             session.setMaxInactiveInterval(30*60);
             response.sendRedirect("log/index.jsp");
+        } else {
+            session.setAttribute("errorSta", VedioStudyConstants.USER_PASSWORD_WRONG);
+            response.sendRedirect("error.jsp");
         }
 
     }
@@ -101,6 +115,5 @@ public class LogServlet extends HttpServlet {
             throws ServletException, IOException {
         doGet(request, response);
     }
-
 }
 

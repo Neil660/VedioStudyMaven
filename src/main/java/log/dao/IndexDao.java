@@ -1,6 +1,8 @@
 package log.dao;
 
 import java.util.List;
+import java.util.Map;
+
 import log.vo.*;
 
 public interface IndexDao {
@@ -19,4 +21,7 @@ public interface IndexDao {
 
     //根据视频类别给视频命名
     public String getVedioName (String category) throws Exception;
+
+    //存储上传的视频信息
+    public void insertVedio (Map<String,Object> map) throws Exception;
 }

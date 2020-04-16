@@ -15,7 +15,7 @@ public interface SingleDao {
     public Vedio findVedioByVid(int vid) throws Exception;
 
     //插入视频信息
-    public void insertVedio (int uid, int vid, Vedio vedio) throws Exception;
+    public void insertRecode (int uid, int vid, Vedio vedio) throws Exception;
 
     //更新更新历史记录中的观看时间和视频观看进度
     public void updateRecodeDateAndTime (int uid, int vid) throws Exception;

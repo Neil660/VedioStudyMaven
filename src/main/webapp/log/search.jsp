@@ -177,12 +177,13 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
         <div class="drop-navigation drop-navigation">
             <ul class="nav nav-sidebar">
                 <li class="active"><a class="home-icon"><span></span></a></li>
-                <li class="active"><a href="log/index.jsp" class="home-icon"><span class="glyphicon glyphicon-home" aria-hidden="true"></span>首页</a></li>
+                <li><a href="log/index.jsp" class="home-icon"><span class="glyphicon glyphicon-home" aria-hidden="true"></span>首页</a></li>
                 <li><a href="shows.jsp" class="user-icon"><span class="glyphicon glyphicon-home glyphicon-blackboard" aria-hidden="true"></span>视频学习课程</a></li>
                 <%
                     if(id > 0){
                 %>
-                <li><a href="history.jsp" class="sub-icon"><span class="glyphicon glyphicon-home glyphicon-hourglass" aria-hidden="true"></span>历史记录</a></li>
+                <li><a href="history.jsp" class="sub-icon"><span class="glyphicon glyphicon-home glyphicon-hourglass" aria-hidden="true"></span>待学课程</a></li>
+                <li><a class="sub-icon"><span class="glyphicon glyphicon-home glyphicon-hourglass" aria-hidden="true"></span>完成的课程</a></li>
                 <%
                     }
                 %>
@@ -233,7 +234,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
             <div class="recommended-info">
                 <%
                     List<Vedio> vedioList = (ArrayList<Vedio>)session.getAttribute("vedioList");
-                    String vname = (String)session.getAttribute("vname");
+                    String vname = (String) session.getAttribute("vname");
                     Iterator<Vedio> aIter = vedioList.iterator();
                     int i = 0;
                     if (!aIter.hasNext()) {
@@ -302,7 +303,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                                 <option value="JPN">日本</option>
                             </select>
                         </li>
-                        <li><a href="history.jsp" class="f-history">历史记录</a></li>
+                        <li><a href="history.jsp" class="f-history">待学课程</a></li>
                         <li><a href="#small-dialog5" class="play-icon popup-with-zoom-anim f-history f-help">帮助</a></li>
                     </ul>
                 </div>

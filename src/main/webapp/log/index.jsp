@@ -28,19 +28,16 @@
   <body>
     <%
         IndexDao indexDAO = DaoFactory.getIndexDaoInstance();
+        UserDao userDao = DaoFactory.getUserDaoInstance();
+        User user = new User();
         int id;
         try {
             id = (int) session.getAttribute("id");
+            user = userDao.getUserById(id);
+            session.setAttribute("user", user);
         }catch (NullPointerException e){
             id = 0;
         }
-
-        /*int timeNum;//超时学习提醒时间
-        try {
-            timeNum = Integer.parseInt((String)session.getAttribute("timeNum"));
-        } catch (Exception e) {
-            timeNum = 0;
-        }*/
     %>
     <!--上栏-->
     <nav class="navbar navbar-inverse navbar-fixed-top">
@@ -88,11 +85,12 @@
                           <div class="signup">
                               <form method="post" action="../uploadServlet" enctype="multipart/form-data">
                                   <label>视频标签</label>&nbsp;&nbsp;&nbsp;&nbsp;
-                                  <input type="radio" name="category" value="java"/>JAVA&nbsp;&nbsp;<input type="radio" name="category" value="c"/>C/C++&nbsp;&nbsp;<input type="radio" name="category" value="python"/>Python&nbsp;&nbsp;<br/>
+                                  <input type="radio" name="category" value="java"/>&nbsp;JAVA&nbsp;&nbsp;<input type="radio" name="category" value="c"/>&nbsp;C/C++&nbsp;&nbsp;<input type="radio" name="category" value="python"/>&nbsp;Python&nbsp;&nbsp;<br/>
                                   <label>视频标题</label>&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" name="vedioTitle" /><br/>
                                   <label>视频来源</label>&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" name="publisher" placeholder="视频发布者名称"/><br/>
                                   <label>视频时长</label>&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" name="time" placeholder="格式如'00:00:00'，时分秒"/><br/>
                                   <label>视频介绍</label>&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" name="introduce" /><br/>
+                                  <label>视频积分</label>&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" name="integral" placeholder="建议在1到30之间"/><br/>
                                   <label>视频文件</label><input type="file" name="url" /><br/>
                                   <label></label><input type="submit" value="上传" />
                               </form>
@@ -154,9 +152,10 @@
                       <li class="active"><a class="home-icon"><span class="glyphicon glyphicon-home" aria-hidden="true"></span>首页</a></li>
 					  <li><a href="shows.jsp" class="user-icon"><span class="glyphicon glyphicon-home glyphicon-blackboard" aria-hidden="true"></span>视频学习课程</a></li>
                       <%
-                          if(id > 0){
+                          if(id > 0 && id != 1){
                       %>
-                      <li><a href="history.jsp" class="sub-icon"><span class="glyphicon glyphicon-home glyphicon-hourglass" aria-hidden="true"></span>历史记录</a></li>
+                      <li><a href="history.jsp" class="sub-icon"><span class="glyphicon glyphicon-home glyphicon-hourglass" aria-hidden="true"></span>待学课程</a></li>
+                      <li><a href="historyfinish.jsp" class="sub-icon"><span class="glyphicon glyphicon-home glyphicon-hourglass" aria-hidden="true"></span>完成的课程</a></li>
                       <%
                           }
                       %>
@@ -229,15 +228,14 @@
                             var timer = $('#timer').val();
                             var url = "/VedioStudyMaven_war_exploded";
                             $.ajax({
-                                //注意一下这几个参数
-                                type : "POST",              //方法类型
-                                dataType : "JSON",          //预期服务器返回的数据类型JSON
-                                url : url + "/timeoutReminderServlet",        //提交到的 url
+                                type : "POST",
+                                dataType : "JSON",
+                                url : url + "/timeoutReminderServlet",
                                 data : {
                                     timer:timer
-                                }, //序列化输出字符串类型的结果
+                                },
                                 success : function(result) {
-                                    console.log(result);    //打印服务端返回的数据(调试用)
+                                    console.log(result);
                                     timeNum = result;
                                     alert("定时器设置成功，用户将每隔" + result/60000 + "分钟提醒一次");
                                     ;
@@ -250,14 +248,18 @@
                         <%
                             } else{
                         %>
-						<h3>最近观看</h3>
+                    <h1>欢迎您，<%=user.getUserName()%>!您目前的学习积分一共是：<%=user.getVedioIntegral()%></h1>
+                    <br>
+                    <hr/>
+                    <br>
+                    <h3>在学习的课程</h3>
 					</div>
                     <%
                         List<Recode> recenList = null;
                         recenList = indexDAO.findRecentlyVedioByUid(id);
                         if(recenList.isEmpty()){    //如果无观看历史
                     %>
-                    <p>无观看历史</p>
+                    <p>无在学习的课程</p>
                     <%
                         }else{  //有观看历史
                             int[] imaxgroud = indexDAO.findLastestRecode(recenList);
@@ -465,7 +467,7 @@
 									<option value="JPN">日本</option>
 								</select>
 							</li>
-							<li><a href="history.jsp" class="f-history">历史记录</a></li>
+							<li><a href="history.jsp" class="f-history">待学课程</a></li>
 							<li><a href="#small-dialog5" class="play-icon popup-with-zoom-anim f-history f-help">帮助</a></li>
 						</ul>
 					</div>

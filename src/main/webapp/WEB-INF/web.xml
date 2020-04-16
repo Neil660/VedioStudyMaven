@@ -11,8 +11,7 @@
         <welcome-file>historyServlet.jsp</welcome-file>
     </welcome-file-list>
 
-
-    <!--搜索-->
+    <!-- 搜索 -->
     <servlet>
         <servlet-name>SearchServlet</servlet-name>
         <servlet-class>log.servlet.SearchServlet</servlet-class>
@@ -22,7 +21,7 @@
         <url-pattern>/searchServlet</url-pattern>
     </servlet-mapping>
 
-    <!--上传视频-->
+    <!-- 上传视频 -->
     <servlet>
         <servlet-name>UploadServlet</servlet-name>
         <servlet-class>log.servlet.UploadServlet</servlet-class>
@@ -42,7 +41,7 @@
         <url-pattern>/captcha</url-pattern>
     </servlet-mapping>
 
-    <!--登录-->
+    <!-- 登录 -->
     <servlet>
         <servlet-name>LogServlet</servlet-name>
         <servlet-class>log.servlet.LogServlet</servlet-class>
@@ -52,7 +51,7 @@
         <url-pattern>/logServlet</url-pattern>
     </servlet-mapping>
 
-    <!--注册-->
+    <!-- 注册 -->
     <servlet>
         <servlet-name>SignServlet</servlet-name>
         <servlet-class>log.servlet.SignServlet</servlet-class>
@@ -62,7 +61,7 @@
         <url-pattern>/signupServlet</url-pattern>
     </servlet-mapping>
 
-    <!--注销-->
+    <!-- 注销 -->
     <servlet>
         <servlet-name>QuitServlet</servlet-name>
         <servlet-class>log.servlet.QuitServlet</servlet-class>
@@ -72,7 +71,7 @@
         <url-pattern>/quitServlet</url-pattern>
     </servlet-mapping>
 
-    <!--详情页-->
+    <!-- 详情页 -->
     <servlet>
         <servlet-name>SingleServletDaoImpl</servlet-name>
         <servlet-class>log.servlet.SingleServlet</servlet-class>
@@ -82,7 +81,7 @@
         <url-pattern>/SingleServlet</url-pattern>
     </servlet-mapping>
 
-    <!--视频进度-->
+    <!-- 视频进度 -->
     <servlet>
         <servlet-name>SetCurrentTimeServlet</servlet-name>
         <servlet-class>log.servlet.SetCurrentTimeServlet</servlet-class>
@@ -92,7 +91,7 @@
         <url-pattern>/setCurrentTimeServlet</url-pattern>
     </servlet-mapping>
 
-    <!--视频学习超时提醒-->
+    <!-- 视频学习超时提醒 -->
     <servlet>
         <servlet-name>TimeoutReminderServlet</servlet-name>
         <servlet-class>log.servlet.TimeoutReminderServlet</servlet-class>
@@ -102,7 +101,7 @@
         <url-pattern>/timeoutReminderServlet</url-pattern>
     </servlet-mapping>
 
-    <!--所有视频-->
+    <!-- 所有视频 -->
     <servlet>
         <servlet-name>ShowServlet</servlet-name>
         <servlet-class>log.servlet.ShowServlet</servlet-class>
@@ -112,7 +111,17 @@
         <url-pattern>/showServlet</url-pattern>
     </servlet-mapping>
 
-    <!--测试-->
+    <!-- 问题答案 -->
+    <servlet>
+        <servlet-name>TestKeyServlet</servlet-name>
+        <servlet-class>log.servlet.TestKeyServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>TestKeyServlet</servlet-name>
+        <url-pattern>/testKeyServlet</url-pattern>
+    </servlet-mapping>
+
+    <!-- 测试 -->
     <servlet>
         <servlet-name>CeshiServlet</servlet-name>
         <servlet-class>log.servlet.CeshiServlet</servlet-class>

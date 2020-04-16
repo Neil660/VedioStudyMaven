@@ -42,7 +42,7 @@ public class SingleServlet extends HttpServlet {
             int sd = singleDao.isWatched(id, vid);
             if(sd == 2){
                 //添加历史记录
-                singleDao.insertVedio(id, vid, vedio);
+                singleDao.insertRecode(id, vid, vedio);
                 //查找对应的观看记录
                 recode = singleDao.findRecodeByUidAndVid(id, vid);
                 session.setAttribute("recode",recode);

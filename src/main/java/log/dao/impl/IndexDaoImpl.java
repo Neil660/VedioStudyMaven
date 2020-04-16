@@ -2,12 +2,11 @@ package log.dao.impl;
 
 import java.sql.*;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 import log.common.VoSetData;
 import log.dao.IndexDao;
+import log.factory.DaoFactory;
 import log.factory.MysqlFactory;
 import log.vo.*;
 
@@ -15,9 +14,7 @@ public class IndexDaoImpl implements IndexDao {
 	public List<Recode> findRecentlyVedioByUid (int id) throws Exception {
 		List<Recode> recenList = null;
         recenList = new ArrayList<Recode>();
-        StringBuffer sqlBuffer = new StringBuffer("select * from recode where userID=");
-        sqlBuffer.append(id);
-		String sql = sqlBuffer.toString();
+		String sql = "select * from recode where userID = " + id + " and time != -1";
         try {
             recenList = VoSetData.queryRecodeList(sql, recenList);
         } catch (Exception e) {
@@ -120,5 +117,23 @@ public class IndexDaoImpl implements IndexDao {
         sbVName.append("_").append(vnameNum).append(".avi");
         vname = sbVName.toString();
         return vname;
+    }
+
+    public void insertVedio (Map<String,Object> map) throws Exception {
+        IndexDao indexDAO = DaoFactory.getIndexDaoInstance();
+	    String vedioName = indexDAO.getVedioName((String) map.get("category"));
+	    String url = "vedio/" + (String) map.get("category") + "_" + vedioName.substring(vedioName.indexOf("_") + 1, vedioName.indexOf("."));
+
+        Timestamp release = new Timestamp(System.currentTimeMillis());
+        String sql  = "insert into vedio value(null,?,?,?,?,?,?,?,?,?)";
+        map.put("url", url);
+        map.put("release", release);
+        map.put("count", 0);
+
+        try {
+            VoSetData.insertVedio(sql, map);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }

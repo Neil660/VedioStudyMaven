@@ -53,4 +53,9 @@ public class User implements Serializable {
      * 用户住址
      */
     private String place;
+
+    /**
+     * 所有积分
+     */
+    private int vedioIntegral;
 }
